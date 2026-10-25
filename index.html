@@ -1,0 +1,728 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Graphics Desk (view only)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#eef1f5; --surface:#ffffff; --surface2:#f5f7fa; --ink:#1c2433; --muted:#5a6475; --line:#dce2ea;
+  --navy:#1b2d5a; --navy-ink:#ffffff; --accent:#c8102e; --ok:#1c7a4a; --ok-bg:#e3f4ea; --warn:#9a5200; --warn-bg:#fff1dc;
+  --sugg:#e0a100;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif; --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  color-scheme:dark; --bg:#171b22; --surface:#1f252e; --surface2:#272e39; --ink:#e4e7ec; --muted:#b0b8c4; --line:#343d4a;
+  --navy:#8fb1f5; --navy-ink:#131820; --accent:#f06a78; --ok:#6fcf9d; --ok-bg:#1d3328; --warn:#e8b567; --warn-bg:#3a301f; --sugg:#e9c46a; }}
+:root[data-theme="dark"]{
+  color-scheme:dark; --bg:#171b22; --surface:#1f252e; --surface2:#272e39; --ink:#e4e7ec; --muted:#b0b8c4; --line:#343d4a;
+  --navy:#8fb1f5; --navy-ink:#131820; --accent:#f06a78; --ok:#6fcf9d; --ok-bg:#1d3328; --warn:#e8b567; --warn-bg:#3a301f; --sugg:#e9c46a; }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.4;padding:0 16px 48px}
+.wrap{max-width:1320px;margin:0 auto}
+button,select,input,textarea{font:inherit;color:inherit}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--sugg);outline-offset:2px}
+header.top{position:sticky;top:0;z-index:6;background:var(--bg);padding-block:10px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;border-bottom:1px solid var(--line)}
+.brand{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:.02em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.brand a{font-family:var(--body);font-size:13px;font-weight:600;color:var(--muted);text-transform:none;letter-spacing:0}
+nav.tabs{display:flex;flex-wrap:wrap;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:3px}
+nav.tabs button{font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:.04em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);padding:7px 14px;border-radius:7px;cursor:pointer}
+nav.tabs button[aria-selected="true"]{background:var(--navy);color:var(--navy-ink)}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 12px;cursor:pointer;font-weight:600;font-size:14px}
+.btn:hover{border-color:var(--navy)}
+.btn.kill{margin-left:auto;background:#c62828;color:#fff;border-color:#c62828;font-family:var(--display);font-weight:800;font-size:16px;letter-spacing:.04em;text-transform:uppercase;padding:8px 16px}
+.btn.kill:hover{filter:brightness(1.12);border-color:#c62828}
+.killmsg{flex-basis:100%;text-align:right;font-size:13px;font-weight:600;color:var(--muted)}
+.btn.primary{background:var(--navy);color:var(--navy-ink);border-color:var(--navy)}
+.btn.small{padding:4px 9px;font-size:13px}
+.btn.done{background:var(--ok-bg);color:var(--ok);border-color:transparent}
+select,input,textarea{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 9px}
+.bar{display:flex;flex-wrap:wrap;align-items:end;gap:10px;padding-top:14px}
+.bar label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:grid;gap:3px}
+.bar .vs{font-family:var(--display);font-weight:800;font-size:20px;color:var(--muted);padding-bottom:6px}
+.msg{font-size:13px;color:var(--muted)}
+.msg.warn{color:var(--warn)}
+section.view{padding-top:16px;display:grid;gap:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:16px;align-items:start}
+.bios{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:820px){.bios{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:12px;min-width:0}
+.panel h2{margin:0;font-family:var(--display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.02em;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.panel h3{margin:0;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.hint{font-size:13px;color:var(--muted);margin:0}
+.seg{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:2px;width:max-content;max-width:100%}
+.seg button{border:0;background:transparent;color:var(--muted);font-weight:600;font-size:14px;padding:5px 12px;border-radius:6px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--navy);color:var(--navy-ink)}
+.plist{display:grid;gap:2px;max-height:70vh;overflow:auto}
+.plist button{display:grid;grid-template-columns:36px 1fr auto;gap:8px;align-items:center;text-align:left;border:1px solid transparent;background:transparent;border-radius:8px;padding:6px 8px;cursor:pointer}
+.plist button:hover{background:var(--surface2)}
+.plist button[aria-current="true"]{background:var(--surface2);border-color:var(--navy)}
+.plist .n{font-family:var(--display);font-weight:800;font-size:18px;color:var(--muted);text-align:right}
+.plist .s{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.plist .pos{font-size:11px;font-weight:700;color:var(--muted);margin-left:4px}
+.plist .grp{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:8px 8px 2px}
+.field{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:8px;align-items:start;border-top:1px solid var(--line);padding-top:8px}
+.field:first-child{border-top:0;padding-top:0}
+.field .k{font-size:13px;color:var(--muted);padding-top:6px}
+.field .v{background:var(--surface2);border-radius:6px;padding:6px 9px;white-space:pre-wrap;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;min-height:34px}
+.field textarea{width:100%;min-height:150px;resize:vertical;line-height:1.5}
+@media (max-width:560px){.field{grid-template-columns:1fr auto}.field .k{grid-column:1/-1;padding-top:0}}
+.stats4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stat{background:var(--surface2);border-radius:8px;padding:6px 8px;display:grid;gap:4px}
+.stat .t{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:4px}
+.stat .val{font-family:var(--display);font-weight:800;font-size:24px;display:flex;justify-content:space-between;align-items:center;gap:4px}
+.stat .btn{padding:2px 7px;font-size:12px;font-family:var(--body)}
+.head{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.head img{width:84px;height:84px;border-radius:10px;object-fit:cover;background:var(--surface2)}
+.head .nophoto{width:84px;height:84px;border-radius:10px;background:var(--surface2);display:grid;place-items:center;font-size:11px;color:var(--muted);text-align:center;padding:4px}
+.head .nm{font-family:var(--display);font-weight:800;font-size:28px;line-height:1.05}
+.head .sub{font-size:13px;color:var(--muted)}
+.sugg{display:grid;gap:4px}
+.sugg button{text-align:left;border:1px dashed var(--line);background:transparent;border-radius:8px;padding:5px 9px;cursor:pointer;font-size:14px}
+.sugg button:hover{border-color:var(--navy);background:var(--surface2)}
+.sugg button::before{content:"+ ";font-weight:700;color:var(--ok)}
+.sugg button.used{opacity:.45}
+.sugg button.used::before{content:"✓ "}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:14px}
+th,td{padding:5px 6px;border-bottom:1px solid var(--line);text-align:center}
+th{font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+td.l,th.l{text-align:left}
+tr.us td{font-weight:700;background:var(--surface2)}
+.tablewrap{overflow-x:auto}
+.checks{display:grid;gap:4px;font-size:14px}
+.checks .w{color:var(--warn)}
+.checks .ok{color:var(--ok)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sg{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--surface2);border-radius:8px;padding:8px 10px}
+.sg .nm{font-weight:700;font-size:13px}
+.sg .st{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:var(--surface);color:var(--muted);border:1px solid var(--line)}
+.sg .st.in{background:var(--accent);color:#fff;border-color:transparent}
+.sg .res{font-size:13px;color:var(--muted)}
+.sg .res.bad{color:var(--warn)}
+.conn{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.conn.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}
+#killAll,#killMsg,#conn{display:none!important}
+.viewonly{background:#2b3a55;color:#fff;font:600 15px Barlow,system-ui,sans-serif;padding:8px 14px;border-radius:8px;margin:8px 0}
+.viewonly b{color:#ffd166}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="viewonly"><b>View-only copy</b> for broadcast prep. Stats load live from the OJHL; rosters and tonight's game are updated by Clark. Nothing here can send to the broadcast.</div>
+    <div class="brand"><span class="dot"></span>Graphics Desk</div>
+    <nav class="tabs" role="tablist">
+      <button data-tab="bios">Player Bios</button>
+      <button data-tab="scorers">Top Scorers</button>
+      <button data-tab="last5">Last 5</button>
+      <button data-tab="standings">Standings</button>
+      <button data-tab="goalies">Goalie Matchup</button>
+    </nav>
+    <button class="btn kill" id="killAll" title="Takes every graphic off air except the score bug">Take out all</button>
+    <span class="killmsg" id="killMsg" hidden></span>
+  </header>
+
+  <div class="bar">
+    <label>Season<select id="season"></select></label>
+    <label>Visitor<select id="vis"></select></label>
+    <span class="vs">at</span>
+    <label>Home<select id="home"></select></label>
+    <button class="btn primary" id="refresh">Refresh stats</button>
+    <span class="msg" id="msg"></span>
+    <span class="conn" id="conn" title="Start with “Start Graphics Desk.cmd” to connect to Singular">Singular: not connected</span>
+  </div>
+
+  <main id="view"></main>
+</div>
+
+<script src="data.js"></script>
+<script>window.VIEW_ONLY = true;</script>
+<script>
+/* Graphics Desk: pulls OJHL stats from the league's public HockeyTech feed and lays them out
+   field-by-field to match the Singular templates, so each value can be copied straight in.
+   Loaded as JSONP so it works when the file is opened directly. */
+const KEY = 'key=77a0bd73d9d363d3&client_code=ojhl&league_id=1&lang=en';
+const MK = 'https://lscluster.hockeytech.com/feed/index.php?feed=modulekit&fmt=json&' + KEY;
+const SV = 'https://lscluster.hockeytech.com/feed/index.php?feed=statviewfeed&' + KEY;
+const NOPHOTO = /nophoto/;
+
+function jsonp(url, ms = 15000){
+  return new Promise((resolve, reject) => {
+    const cb = '__gd' + Date.now() + Math.floor(Math.random()*1e6), s = document.createElement('script');
+    const done = () => { delete window[cb]; s.remove(); clearTimeout(t); };
+    const t = setTimeout(() => { done(); reject(new Error('timeout')); }, ms);
+    window[cb] = d => { done(); resolve(d); };
+    s.onerror = () => { done(); reject(new Error('network')); };
+    s.src = url + '&callback=' + cb; document.head.appendChild(s);
+  });
+}
+const mk = (view, p = '') => jsonp(`${MK}&view=${view}${p}`).then(d => d.SiteKit);
+
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm = s => String(s || '').toLowerCase().replace(/[^a-z]/g, '');
+const up = s => String(s || '').toUpperCase();
+const store = {
+  get(k){ try{ return localStorage.getItem('gd.' + k); }catch{ return null; } },
+  set(k, v){ try{ localStorage.setItem('gd.' + k, v); }catch{} },
+};
+
+/* ---------- state ---------- */
+const S = {
+  tab: store.get('tab') || 'bios',
+  seasons: [], season: null, teams: [], homeId: null, visId: null,
+  team: {},          // teamId -> {roster, skaters, goalies, schedule}
+  standings: null,
+  player: {},        // playerId -> {games, seasons, bio}
+  bioSide: 'home', bioPid: null, bioSort: store.get('bioSort') || 'num', conf: null, goalie: {},
+};
+const T = id => S.teams.find(t => t.id === String(id));
+const shortCode = id => (T(id) || {}).code || '';
+const seasonLabel = () => (S.seasons.find(s => s.season_id === S.season) || {}).season_name || '';
+function seasonFooter(){
+  const n = seasonLabel(), m = n.match(/(\d{2,4})\s*[-\/]\s*(\d{2,4})/);
+  if(m){ const a = m[1].length === 2 ? '20' + m[1] : m[1], b = m[2].slice(-2); return `${a}/${b} OJHL`; }
+  return n ? up(n) : '';
+}
+
+// Cleaner logos uploaded to Singular, used in place of the league's (by league team id).
+// Box colours behind each team's logo (by league team id). Teams not listed keep whatever Singular has.
+const TEAM_COLOR = { '25': '75253C', '17': '0B1F3F', '28': '0A38A8' }; // Pickering maroon, Toronto navy, Newmarket blue
+// Build a Singular colour value in the same shape as the one already there.
+function sgColor(existing, hex){
+  const x = JSON.parse(JSON.stringify(existing || {})); x.type = 'solid';
+  x.solidColor = { r: parseInt(hex.slice(0, 2), 16), g: parseInt(hex.slice(2, 4), 16), b: parseInt(hex.slice(4, 6), 16), a: 1 };
+  return x;
+}
+// Thomas's standings logos (from the Hockey app's EAST standings, Oct 2026). Used by the Leaderboard first.
+const STANDINGS_LOGO = {"10":"https://www.auroratigersjra.ca/wp-content/uploads/sites/14/2024/01/Aurora-500px.png","14":"https://www.cobourgcougars.com/wp-content/uploads/sites/16/2023/05/cougars-512.png","18":"https://lindsaymuskies.ojhl.ca/wp-content/uploads/sites/7/2023/05/muskies-512.png","20":"https://upload.wikimedia.org/wikipedia/en/7/78/Markham_Royals_logo.png","23":"https://upload.wikimedia.org/wikipedia/en/7/7e/North_York_Rangers.png","25":"https://image.singular.live/de0a643b6c5cb4403746ee662071ddae/images/2uo3klhR5oBzO8tbInOxAu_w512h512.webp","26":"https://stmichaelsbuzzers.ojhl.ca/wp-content/uploads/sites/4/2023/05/buzzers-512.png","27":"https://upload.wikimedia.org/wikipedia/en/1/10/Stouffville_Spirit.png","28":"https://newmarkethurricanes.ojhl.ca/wp-content/uploads/sites/2/2025/07/Newmarket-Hurricanes-full-logo.png","30":"https://trentongoldenhawks.ojhl.ca/wp-content/uploads/sites/8/2023/05/cropped-goldenhawks-512.png","31":"https://www.wellingtondukes.com/wp-content/uploads/sites/12/2023/05/cropped-dukes-512.png"};
+const LOGO_OVERRIDE = { '25': 'https://image.singular.live/de0a643b6c5cb4403746ee662071ddae/images/0wo3zPMy8Myw5CduCYePdT_w933h933.png', // Pickering Panthers
+  '17': 'https://image.singular.live/de0a643b6c5cb4403746ee662071ddae/images/6v9rfeh0a6rD1WeZd1AvmD_w422h418.png' }; // Toronto Warriors
+/* ---------- data loading ---------- */
+async function loadTeam(id){
+  const q = `&team_id=${id}&season_id=${S.season}`;
+  const [r, sk, gl, sc] = await Promise.all([
+    mk('roster', q),
+    mk('statviewtype', `&type=topscorers${q}&first=0&limit=200`),
+    mk('statviewtype', `&type=topgoalies${q}&first=0&limit=20&qualified=all`),
+    mk('schedule', q),
+  ]);
+  S.team[id] = {
+    roster: (r.Roster || []).filter(p => p.player_id),
+    skaters: sk.Statviewtype || [], goalies: gl.Statviewtype || [], schedule: sc.Schedule || [],
+  };
+}
+async function loadStandings(){
+  const d = await jsonp(`${SV}&view=teams&groupTeamsBy=division&context=overall&site_id=0&season=${S.season}&special=false&division=-1&sort=points`);
+  S.standings = (d[0] && d[0].sections || []).map(sec => ({ name: sec.headers.name.properties.label, rows: sec.data.map(x => x.row) }));
+}
+async function loadPlayer(pid){
+  if(S.player[pid]) return;
+  S.player[pid] = { loading: true };
+  try{
+    const [g, s, p] = await Promise.all([
+      mk('player', `&category=gamebygame&player_id=${pid}&season_id=${S.season}`),
+      mk('player', `&category=seasonstats&player_id=${pid}`),
+      mk('player', `&category=profile&player_id=${pid}`),
+    ]);
+    S.player[pid] = { games: (g.Player && g.Player.games) || [], seasons: (s.Player || {}), bio: (p.Player && p.Player.bio) || '' };
+  }catch{ S.player[pid] = { error: true }; }
+  if(S.bioPid === pid) render();
+}
+
+function setMsg(t, warn){ const m = document.getElementById('msg'); m.textContent = t; m.className = 'msg' + (warn ? ' warn' : ''); }
+
+async function refresh(){
+  setMsg('Loading stats from the OJHL…');
+  S.team = {}; S.player = {}; S.standings = null;
+  try{
+    await Promise.all([loadTeam(S.homeId), S.visId !== S.homeId ? loadTeam(S.visId) : null, loadStandings()]);
+    setMsg(`Stats updated ${new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'})}. Official statistics provided by the OJHL.`);
+  }catch{
+    setMsg('Couldn’t reach the OJHL stats feed. Check the internet connection and press Refresh.', true);
+  }
+  render();
+}
+
+async function init(){
+  try{
+    const s = await mk('seasons');
+    S.seasons = (s.Seasons || []).filter(x => x.career === '1');
+    const today = new Date().toISOString().slice(0, 10);
+    const cur = S.seasons.find(x => x.start_date <= today) || S.seasons[0];
+    S.season = store.get('season') && S.seasons.some(x => x.season_id === store.get('season')) ? store.get('season') : cur.season_id;
+    await loadTeams();
+  }catch{
+    setMsg('Couldn’t reach the OJHL stats feed. Check the internet connection, then reload this page.', true);
+    return;
+  }
+  // Tonight's matchup comes from the PA Lineup Desk game setup, when there is one.
+  const pa = window.PA_DATA, byName = n => S.teams.find(t => norm(t.name) === norm(n));
+  const pic = byName('Pickering Panthers') || S.teams[0];
+  const g = pa && pa.game, name = id => pa && pa.teams && pa.teams[id] && pa.teams[id].name;
+  S.homeId = (g && byName(name(g.homeId)) || pic).id;
+  S.visId = (g && byName(name(g.visitorId)) || S.teams.find(t => t.id !== S.homeId)).id;
+  fillSelects();
+  await refresh();
+}
+async function loadTeams(){
+  const t = await mk('teamsbyseason', `&season_id=${S.season}`);
+  S.teams = (t.Teamsbyseason || []).map(x => ({ id: x.id, name: x.name, city: x.city, code: x.code, conf: x.division_long_name, logo: LOGO_OVERRIDE[x.id] || x.team_logo_url }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+function fillSelects(){
+  document.getElementById('season').innerHTML = S.seasons.map(s => `<option value="${s.season_id}" ${s.season_id === S.season ? 'selected' : ''}>${esc(s.season_name)}</option>`).join('');
+  const opts = sel => S.teams.map(t => `<option value="${t.id}" ${t.id === sel ? 'selected' : ''}>${esc(t.name)}</option>`).join('');
+  document.getElementById('home').innerHTML = opts(S.homeId);
+  document.getElementById('vis').innerHTML = opts(S.visId);
+}
+
+/* ---------- derived stats ---------- */
+function playersFor(id){
+  const t = S.team[id]; if(!t) return [];
+  const sk = new Map(t.skaters.map(p => [p.player_id, p])), gl = new Map(t.goalies.map(p => [p.player_id, p]));
+  return t.roster.map(r => ({
+    id: r.player_id, num: r.tp_jersey_number || '', first: r.first_name, last: r.last_name, name: r.name,
+    pos: r.position, goalie: r.position === 'G', rookie: r.rookie === '1',
+    year: (r.rawbirthdate || r.birthdate || '').slice(0, 4), home: r.homeplace || '',
+    photo: NOPHOTO.test(r.player_image || '') ? '' : r.player_image,
+    s: sk.get(r.player_id) || null, g: gl.get(r.player_id) || null,
+  })).sort((a, b) => (a.goalie - b.goalie) || ((+a.num || 999) - (+b.num || 999)));
+}
+// Hometown spellings someone has already fixed in the PA roster win over the league's.
+function paHometown(p){
+  const teams = (window.PA_DATA && window.PA_DATA.teams) || {};
+  for(const t of Object.values(teams)) for(const q of (t.players || []))
+    if(norm(q.first) === norm(p.first) && norm(q.last) === norm(p.last) && q.hometown) return q.hometown;
+  return '';
+}
+const rec = g => `${g.wins || 0}-${g.losses || 0}-${g.ot_losses || 0}-${g.shootout_losses || 0}`;
+
+function statFields(p){
+  if(p.goalie){
+    const g = p.g || {};
+    return [['GAMES', g.games_played || '0'], ['W', g.wins || '0'], ['GAA', g.goals_against_average || '0.00'], ['SV%', g.save_percentage || '.000']];
+  }
+  const s = p.s || {};
+  return [['GAMES', s.games_played || '0'], ['G', s.goals || '0'], ['A', s.assists || '0'], ['PTS', s.points || '0']];
+}
+
+function suggestions(p, teamId){
+  const out = [], d = S.player[p.id], s = p.s, t = S.team[teamId], tname = up((T(teamId) || {}).name || '');
+  if(p.goalie && p.g){
+    const g = p.g;
+    out.push(`- ${rec(g)} RECORD, ${g.goals_against_average} GAA, ${g.save_percentage} SV%`);
+    if(+g.shutouts) out.push(`- ${g.shutouts} SHUTOUT${+g.shutouts > 1 ? 'S' : ''} THIS SEASON`);
+  }
+  if(!p.goalie && s){
+    const rank = [...t.skaters].sort((a, b) => b.points - a.points || b.goals - a.goals);
+    if(+s.points > 0 && rank[0] && rank[0].player_id === p.id) out.push(`- LEADS ${tname} IN SCORING (${s.points} PTS)`);
+    const gr = [...t.skaters].sort((a, b) => b.goals - a.goals);
+    if(+s.goals > 0 && gr[0] && gr[0].player_id === p.id && rank[0].player_id !== p.id) out.push(`- LEADS ${tname} IN GOALS (${s.goals})`);
+    if(+s.power_play_goals) out.push(`- ${s.power_play_goals} POWER PLAY GOAL${+s.power_play_goals > 1 ? 'S' : ''}`);
+    if(+s.game_winning_goals) out.push(`- ${s.game_winning_goals} GAME-WINNING GOAL${+s.game_winning_goals > 1 ? 'S' : ''}`);
+    if(+s.short_handed_goals) out.push(`- ${s.short_handed_goals} SHORTHANDED GOAL${+s.short_handed_goals > 1 ? 'S' : ''}`);
+  }
+  if(p.rookie) out.push('- OJHL ROOKIE');
+  if(d && d.games && !p.goalie){
+    const games = [...d.games].sort((a, b) => b.date_played.localeCompare(a.date_played));
+    const pts = x => (+x.goals || 0) + (+x.assists || 0);
+    for(const n of [5, 10]) if(games.length >= n){
+      const last = games.slice(0, n), P = last.reduce((a, x) => a + pts(x), 0), G = last.reduce((a, x) => a + (+x.goals || 0), 0);
+      if(P) out.push(`- ${P} PTS IN LAST ${n} GAMES (${G} GOAL${G === 1 ? '' : 'S'})`);
+    }
+    let streak = 0; for(const x of games){ if(pts(x) > 0) streak++; else break; }
+    if(streak >= 3) out.push(`- ${streak}-GAME POINT STREAK`);
+  }
+  if(d && d.seasons){
+    // The feed adds a "Total" row per season type; it is not a season.
+    const reg = (d.seasons.regular || []).filter(r => r.team_name && !/^total$/i.test(String(r.season_name).trim()));
+    const cur = reg.filter(r => r.season_id === String(S.season));
+    // More than one team this season means a trade: split out the stats with this club.
+    if(cur.length > 1){
+      const here = cur.find(r => r.team_id === String(teamId)), before = cur.find(r => r.team_id !== String(teamId));
+      if(before) out.push(`- ACQUIRED FROM ${up(before.team_name)}`);
+      if(here && !p.goalie) out.push(`- ${here.points} POINTS WITH ${up(here.team_nickname || here.team_name)} (${here.games_played} GAMES)`);
+    }
+    const prev = reg.find(r => r.season_id !== String(S.season) && r.season_id < String(S.season) && +r.games_played > 0)
+      || reg.find(r => r.season_id !== String(S.season) && +r.games_played > 0);
+    if(prev){
+      const lab = (prev.season_name.match(/\d{2,4}\s*-\s*\d{2,4}/) || [prev.season_name])[0].replace(/\s/g, '');
+      out.push(p.goalie
+        ? `- ${lab}: ${prev.games_played} GP WITH ${up(prev.team_name)}`
+        : `- ${lab}: ${prev.goals}G, ${prev.assists}A, ${prev.points} PTS IN ${prev.games_played} GP (${up(prev.team_name)})`);
+    }
+  }
+  return out;
+}
+function bioHistory(p){
+  const d = S.player[p.id]; if(!d || !d.bio) return [];
+  const tmp = document.createElement('div');
+  tmp.innerHTML = d.bio.replace(/<br\s*\/?>/gi, '\n').replace(/<\/p>/gi, '\n');
+  return tmp.textContent.split('\n').map(x => x.trim()).filter(x => x && !/^career history:?$/i.test(x)).slice(0, 12);
+}
+function bottomLine(p){
+  const home = up(paHometown(p) || p.home);
+  return [p.year && `BORN: ${p.year}`, home && `HOMETOWN: ${home}`].filter(Boolean).join('  ');
+}
+const mainKey = p => `main.${S.season}.${p.id}`;
+function mainText(p){ return store.get(mainKey(p)) ?? bottomLine(p); }
+
+/* ---------- rendering ---------- */
+function copyBtn(text, label = 'Copy'){ return `<button class="btn small" data-copy="${esc(text)}">${label}</button>`; }
+
+/* ---------- Singular (only when opened through graphics-server.js, which holds the token) ---------- */
+const SG = { on: false, state: {}, result: {}, build: {}, confirm: null };
+const onAir = name => /^In/.test(SG.state[name] || '');
+async function sgLoad(){
+  if(!/^http/.test(location.protocol) || window.VIEW_ONLY) return;
+  try{
+    const r = await fetch('/api/control'); if(!r.ok) throw 0;
+    const list = await r.json();
+    SG.state = {}; SG.payload = {}; for(const s of list){ SG.state[s.subCompositionName] = s.state; SG.payload[s.subCompositionName] = s.payload || {}; }
+    SG.on = true;
+  }catch{ SG.on = false; }
+  const c = document.getElementById('conn');
+  c.textContent = SG.on ? 'Singular: connected' : 'Singular: not connected'; c.classList.toggle('ok', SG.on);
+}
+async function sgPatch(items){
+  if(window.VIEW_ONLY) throw new Error('view-only copy');
+  const r = await fetch('/api/control', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(items) });
+  if(!r.ok) throw new Error((await r.text()).slice(0, 200) || ('HTTP ' + r.status));
+}
+// One strip per graphic: which Singular template it fills, whether it's on air, and the buttons.
+// `key` names a payload builder registered in SG.build during render, run at click time.
+function sgBar(name, key){
+  if(!SG.on) return '';
+  const res = SG.result[key];
+  if(SG.confirm === key) return `<div class="sg" style="outline:2px solid var(--accent)"><span class="nm">${esc(name)} is ON AIR. Sending changes what viewers see right now.</span>
+    <span style="flex:1"></span>
+    <button class="btn small primary" data-sg-send="${key}" data-sg-name="${esc(name)}" data-sg-sure="1">Send anyway</button>
+    <button class="btn small" data-sg-cancel="1">Cancel</button></div>`;
+  return `<div class="sg"><span class="nm">Singular · ${esc(name)}</span>
+    <span class="st ${onAir(name) ? 'in' : ''}">${onAir(name) ? 'On air' : 'Off air'}</span>
+    <span style="flex:1"></span>
+    <button class="btn small primary" data-sg-send="${key}" data-sg-name="${esc(name)}">Send to Singular</button>
+    ${onAir(name)
+      ? `<button class="btn small" data-sg-take="Out" data-sg-name="${esc(name)}">Take Out</button>`
+      : `<button class="btn small" data-sg-take="In" data-sg-name="${esc(name)}">Take In</button>`}
+    ${res ? `<span class="res ${res.bad ? 'bad' : ''}" style="flex-basis:100%">${esc(res.text)}</span>` : ''}
+  </div>`;
+}
+async function sgSend(name, key, sure){
+  const payload = SG.build[key] && SG.build[key]();
+  if(!payload) return;
+  // Check live status first: it may have been taken out from Singular's own screen.
+  await sgLoad();
+  if(onAir(name) && !sure){ SG.confirm = key; render(); return; }
+  SG.confirm = null;
+  try{
+    await sgPatch([{ subCompositionName: name, payload }]);
+    SG.result[key] = { text: `Sent ${Object.keys(payload).length} fields at ${new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit', second:'2-digit'})}.${onAir(name) ? '' : ' Still off air. Press Take In when ready.'}` };
+  }catch(e){ SG.result[key] = { bad: true, text: 'Didn’t go through: ' + e.message }; }
+  await sgLoad(); render();
+}
+// Kill switch: everything on air goes Out, except the score bug.
+const KEEP_ON = ['new hockey bug', 'NBC hockey bug'];
+async function killAll(){
+  const msg = document.getElementById('killMsg'), btn = document.getElementById('killAll');
+  const say = t => { msg.textContent = t; msg.hidden = false; };
+  btn.disabled = true;
+  try{
+    const r = await fetch('/api/control', { cache: 'no-store' }); if(!r.ok) throw new Error('HTTP ' + r.status);
+    // Send Out to every graphic except the score bug, not just the ones shown as on air:
+    // the status can be a few seconds old, and Out on a graphic that is already off does nothing.
+    const list = (await r.json()).filter(x => !KEEP_ON.includes(x.subCompositionName));
+    const on = list.filter(x => /^In/.test(x.state || '')).map(x => x.subCompositionName);
+    // By ID, not name: some graphics share a name (e.g. four "Team Lineups"), which Singular rejects.
+    await sgPatch(list.map(x => x.subCompositionId ? { subCompositionId: x.subCompositionId, state: 'Out' } : { subCompositionName: x.subCompositionName, state: 'Out' }));
+    say(on.length ? 'Took out ' + on.join(', ') + '. Score bug left on.' : 'Everything else is off air. Score bug left as it is.');
+  }catch(e){ say('Singular didn’t respond: ' + e.message + '. Take graphics out in Singular.'); }
+  btn.disabled = false;
+  await sgLoad(); render();
+}
+async function sgTake(name, state){
+  try{ await sgPatch([{ subCompositionName: name, state }]); }
+  catch(e){ alert('Singular didn’t respond: ' + e.message); }
+  await sgLoad(); render();
+}
+const teamLogo = code => (S.teams.find(t => t.code === code) || {}).logo || '';
+function field(k, v, opts = {}){
+  return `<div class="field"><div class="k">${esc(k)}</div><div class="v">${esc(v) || '<span class="hint">—</span>'}</div>${v ? copyBtn(v) : '<span></span>'}</div>`;
+}
+function teamSeg(){
+  return `<div class="seg">${['vis', 'home'].map(side => {
+    const id = side === 'home' ? S.homeId : S.visId;
+    return `<button data-side="${side}" aria-pressed="${S.bioSide === side}">${esc((T(id) || {}).name || side)}</button>`;
+  }).join('')}</div>`;
+}
+
+function renderBios(){
+  const tid = S.bioSide === 'home' ? S.homeId : S.visId;
+  // List order: by jersey number (default) or by points; goalies always last.
+  const lastKey = x => String(x.last || String(x.name || '').split(' ').slice(-1)[0]).normalize('NFD').replace(/[^a-zA-Z]/g, '').toLowerCase();
+  const bySort = S.bioSort === 'name'
+    ? (a, b) => (a.goalie - b.goalie) || lastKey(a).localeCompare(lastKey(b)) || String(a.first || '').localeCompare(String(b.first || ''))
+    : S.bioSort === 'pts'
+    ? (a, b) => (a.goalie - b.goalie) || (a.goalie ? ((+a.num || 999) - (+b.num || 999)) : (((+(b.s || {}).points || 0) - (+(a.s || {}).points || 0)) || ((+(b.s || {}).goals || 0) - (+(a.s || {}).goals || 0)) || ((+a.num || 999) - (+b.num || 999))))
+    : (a, b) => (a.goalie - b.goalie) || ((+a.num || 999) - (+b.num || 999));
+  const ps = playersFor(tid).slice().sort(bySort);
+  if(!ps.length) return `<div class="panel"><p class="hint">No roster loaded yet.</p></div>`;
+  if(!ps.some(p => p.id === S.bioPid)) S.bioPid = ps[0].id;
+  const p = ps.find(x => x.id === S.bioPid);
+  loadPlayer(p.id);
+  const d = S.player[p.id];
+  const list = ps.map((x, i) => {
+    const st = x.goalie ? (x.g ? `${rec(x.g)} · ${x.g.save_percentage}` : '') : (x.s ? `${x.s.goals}-${x.s.assists}-${x.s.points}` : '0-0-0');
+    const hdr = i === 0 || x.goalie !== ps[i - 1].goalie ? `<div class="grp">${x.goalie ? 'Goalies' : 'Skaters'}</div>` : '';
+    return `${hdr}<button data-pid="${x.id}" aria-current="${x.id === p.id}"><span class="n">${esc(x.num)}</span><span>${esc(x.name)}<span class="pos">${esc(x.pos)}</span></span><span class="s">${st}</span></button>`;
+  }).join('');
+  const title = `#${p.num} ${up(p.name)}`, stats = statFields(p), used = mainText(p);
+  const sug = suggestions(p, tid), hist = bioHistory(p);
+  SG.build.bio = () => {
+    const ta = document.getElementById('main'), out = { Title: title };
+    stats.forEach(([t, v], i) => { out['statTitle' + (i + 1)] = t; out['stat' + (i + 1)] = String(v); });
+    out['Main Text'] = ta ? ta.value : used;
+    out['Dropline Text'] = seasonFooter();
+    // No league photo: clear the slot rather than leave the previous player's face up.
+    out.Headshot = p.photo || '';
+    return out;
+  };
+  const sugBtns = arr => arr.map(x => `<button data-add="${esc(x)}" class="${used.includes(x) ? 'used' : ''}">${esc(x)}</button>`).join('');
+  return `<div class="bios">
+    <div class="panel">${teamSeg()}<div class="seg bsort" style="margin-top:8px"><span class="hint" style="align-self:center;padding:0 8px">Sort</span><button data-bsort="num" aria-pressed="${S.bioSort !== 'pts' && S.bioSort !== 'name'}"># Number</button><button data-bsort="name" aria-pressed="${S.bioSort === 'name'}">A–Z Last name</button><button data-bsort="pts" aria-pressed="${S.bioSort === 'pts'}">PTS Points</button></div><div class="plist">${list}</div></div>
+    <div class="grid2" style="grid-template-columns:1fr">
+      <div class="panel">
+        <div class="head">
+          ${p.photo ? `<img src="${esc(p.photo)}" alt="">` : `<div class="nophoto">No league photo</div>`}
+          <div><div class="nm">${esc(title)}</div>
+          <div class="sub">${esc(p.pos)} · ${esc((T(tid) || {}).name)}${p.rookie ? ' · Rookie' : ''}</div></div>
+        </div>
+        ${sgBar('Player Bio', 'bio')}
+        <h3>Player Bio template fields</h3>
+        <div>
+          ${field('Title', title)}
+          ${field('Headshot', p.photo || '')}
+          ${p.photo ? '' : `<p class="hint" style="margin:4px 0 0 128px">No league photo. Use a PhotoShelter headshot for this one.</p>`}
+        </div>
+        <div class="stats4">${stats.map(([t, v], i) => `<div class="stat">
+          <div class="t">Stat Title ${i + 1}: ${esc(t)} ${copyBtn(t)}</div>
+          <div class="val">${esc(v)} ${copyBtn(v)}</div></div>`).join('')}</div>
+        <div class="field"><div class="k">Main Text</div>
+          <textarea id="main" spellcheck="false">${esc(used)}</textarea>
+          <div style="display:grid;gap:6px">${copyBtn('', 'Copy')}<button class="btn small" id="resetMain">Reset</button></div>
+        </div>
+        ${field('Season footer', seasonFooter())}
+      </div>
+      <div class="panel">
+        <h3>Storyline ideas from the stats</h3>
+        <p class="hint">Click one to add it to Main Text above the born/hometown line. Edits are kept on this laptop.</p>
+        ${d && d.loading ? '<p class="hint">Loading game log and past seasons…</p>' : ''}
+        ${d && d.error ? '<p class="hint">Couldn’t load this player’s game log.</p>' : ''}
+        <div class="sugg">${sugBtns(sug) || '<p class="hint">Nothing stands out yet.</p>'}</div>
+        ${hist.length ? `<h3>Career history (league bio)</h3><div class="sugg">${sugBtns(hist.map(h => '- ' + up(h)))}</div>` : ''}
+      </div>
+    </div>
+  </div>`;
+}
+
+function scorerLines(id, n){
+  return [...((S.team[id] || {}).skaters || [])].sort((a, b) => b.points - a.points || b.goals - a.goals).slice(0, n)
+    .map(s => `#${s.jersey_number} ${up(s.name)} · ${s.goals}G ${s.assists}A ${s.points} ${+s.points === 1 ? 'PT' : 'PTS'}`);
+}
+function renderScorers(){
+  const n = +(store.get('topN') || 5);
+  const card = id => {
+    const t = T(id) || {}, lines = scorerLines(id, n), title = `${up(t.city || t.code)} TOP ${n} SCORERS`;
+    SG.build['scorers' + id] = () => ({ Title: title, 'Ticker Text': lines.join('\n') });
+    return `<div class="panel"><h2>${esc(t.name)}</h2>
+      ${sgBar('Baseline - Crawl', 'scorers' + id)}
+      <p class="hint">For the Baseline - Crawl template.</p>
+      ${field('Title', title)}${field('Ticker Text', lines.join('\n'))}</div>`;
+  };
+  return `<div class="row"><span class="hint">How many players:</span><div class="seg">${[3, 5, 10].map(k => `<button data-topn="${k}" aria-pressed="${k === n}">${k}</button>`).join('')}</div></div>
+    <div class="grid2">${card(S.visId)}${card(S.homeId)}</div>`;
+}
+
+const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+const crawlDate = d => { const [, m, day] = String(d).split('-'); return m ? `${MONTHS[+m - 1]} ${+day}` : d; };
+function crawlTeam(id, city){
+  const t = T(id); if(!t) return up(city);
+  return S.teams.filter(x => x.city === t.city).length > 1 ? up(t.name) : up(t.city);
+}
+function lastGames(id, n){
+  return ((S.team[id] || {}).schedule || []).filter(g => g.final === '1')
+    .sort((a, b) => b.date_played.localeCompare(a.date_played)).slice(0, n).map(g => {
+      const home = g.home_team === String(id), us = +(home ? g.home_goal_count : g.visiting_goal_count), them = +(home ? g.visiting_goal_count : g.home_goal_count);
+      // The feed counts shootout rounds in g.shootout, so test for any shootout / overtime, not just "1".
+      const so = +g.shootout > 0 || /SO/.test(g.game_status||''), ot = +g.overtime > 0 || /OT/.test(g.game_status||'');
+      const res = us > them ? 'W' : so ? 'SOL' : ot ? 'OTL' : 'L';
+      const oppId = home ? g.visiting_team : g.home_team;
+      return `${res} ${us}-${them} ${home ? 'vs' : '@'} ${crawlTeam(oppId, home ? g.visiting_team_city : g.home_team_city)} · ${crawlDate(g.date_played)}`;
+    });
+}
+function renderLast5(){
+  const card = id => {
+    const t = T(id) || {}, lines = lastGames(id, 5);
+    SG.build['last5' + id] = () => ({ Title: `${up(t.city || t.code)} LAST ${lines.length || 5} GAMES`, 'Ticker Text': lines.join('\n') });
+    return `<div class="panel"><h2>${esc(t.name)}</h2>
+      ${sgBar('Baseline - Crawl', 'last5' + id)}
+      <p class="hint">For the Baseline - Crawl template. Most recent game first. The score is always this team's goals first.</p>
+      ${field('Title', `${up(t.city || t.code)} LAST ${lines.length || 5} GAMES`)}${field('Ticker Text', lines.join('\n'))}</div>`;
+  };
+  return `<div class="grid2">${card(S.visId)}${card(S.homeId)}</div>`;
+}
+
+// e.g. "OJHL 2026/27 STANDINGS (EAST)"
+function standingsTitle(c){ return `OJHL ${seasonFooter().replace(/\s*OJHL$/, '')} STANDINGS (${up(c.name.replace(/\s*Conference$/i, ''))})`; }
+function renderStandings(){
+  if(!S.standings) return `<div class="panel"><p class="hint">Standings not loaded.</p></div>`;
+  const ours = [shortCode(S.homeId), shortCode(S.visId)];
+  if(!S.conf || !S.standings.some(c => c.name === S.conf)) S.conf = (S.standings.find(c => c.rows.some(r => r.team_code === shortCode(S.homeId))) || S.standings[0]).name;
+  const c = S.standings.find(x => x.name === S.conf);
+  const crawl = c.rows.map(r => `${r.rank}. ${r.name} ${r.points} PTS (${r.wins}-${r.losses}-${r.ot_losses}-${r.shootout_losses})`).join('\n');
+  const tsv = ['RK\tTEAM\tGP\tW\tL\tOTL\tSOL\tPTS', ...c.rows.map(r => [r.rank, r.name, r.games_played, r.wins, r.losses, r.ot_losses, r.shootout_losses, r.points].join('\t'))].join('\n');
+  SG.build.standings = () => {
+    // Keep the league order (its tie-breaks) rather than letting the template re-sort, and clear unused rows.
+    const out = { Title: standingsTitle(c), 'Number Of Rows': String(Math.min(c.rows.length, 16)), Indicator: 'PTS', Range: '1', 'Auto Sort': 'unsorted', sort: 'highToLow' };
+    for(let i = c.rows.length + 1; i <= 16; i++){ out['tableName_r' + i] = ''; out['tablePoints_r' + i] = ''; out['tableFlag_r' + i] = ''; }
+    // Keep the logos already chosen in Singular (matched by team nickname); league logo only for a team with none.
+    const cur = (SG.payload && SG.payload.Leaderboard) || {}, have = [];
+    for(let i = 1; i <= 16; i++) if(cur['tableName_r' + i] && cur['tableFlag_r' + i] && !/noimage/.test(cur['tableFlag_r' + i])) have.push([norm(cur['tableName_r' + i]), cur['tableFlag_r' + i]]);
+    c.rows.slice(0, 16).forEach((r, i) => {
+      const nick = norm(r.name.split(' ').slice(-1)[0]), mine = have.find(([n]) => n.endsWith(nick));
+      out['tableName_r' + (i + 1)] = up(r.name); out['tablePoints_r' + (i + 1)] = String(r.points);
+      const tid = (S.teams.find(t => t.code === r.team_code) || {}).id;
+      out['tableFlag_r' + (i + 1)] = STANDINGS_LOGO[tid] || (mine ? mine[1] : teamLogo(r.team_code));
+    });
+    return out;
+  };
+  return `<div class="panel">
+    ${sgBar('Leaderboard', 'standings')}
+    <div class="row"><div class="seg">${S.standings.map(x => `<button data-conf="${esc(x.name)}" aria-pressed="${x.name === S.conf}">${esc(x.name)}</button>`).join('')}</div>
+      <span style="flex:1"></span>${copyBtn(crawl, 'Copy as crawl text')} ${copyBtn(tsv, 'Copy as table')}</div>
+    ${field('Title', standingsTitle(c))}
+    <div class="tablewrap"><table><thead><tr><th>Rk</th><th class="l">Team</th><th>GP</th><th>W</th><th>L</th><th>OTL</th><th>SOL</th><th>PTS</th><th>GF</th><th>GA</th><th class="l">Streak</th></tr></thead>
+    <tbody>${c.rows.map(r => `<tr class="${ours.includes(r.team_code) ? 'us' : ''}"><td>${r.rank}</td><td class="l">${esc(r.name)}</td><td>${r.games_played}</td><td>${r.wins}</td><td>${r.losses}</td><td>${r.ot_losses}</td><td>${r.shootout_losses}</td><td>${r.points}</td><td>${r.goals_for}</td><td>${r.goals_against}</td><td class="l">${esc(r.streak)}</td></tr>`).join('')}</tbody></table></div>
+    <p class="hint">Send fills the Leaderboard template: team name, points and league logo for each row. The template sorts rows by points itself, so teams tied on points may swap places.</p>
+  </div>`;
+}
+
+function renderGoalies(){
+  const pick = id => {
+    const gs = playersFor(id).filter(p => p.goalie);
+    const cur = gs.find(g => g.id === S.goalie[id]) || [...gs].sort((a, b) => (+(b.g || {}).games_played || 0) - (+(a.g || {}).games_played || 0))[0];
+    return { gs, cur };
+  };
+  const V = pick(S.visId), H = pick(S.homeId);
+  const sv = v => String(v || '.000').replace(/^0(?=.)/, '');
+  const line = p => p ? `${up(p.name)} (${rec(p.g || {})})  GAA ${(p.g || {}).goals_against_average || '0.00'}  SV% ${sv((p.g || {}).save_percentage)}` : '';
+  // No league headshot: use the team logo so the picture slot is never empty.
+  const pic = (p, id) => (p && p.photo) || (T(id) || {}).logo || '';
+  const title = V.cur && H.cur ? `BETWEEN THE PIPES - ${up(V.cur.last)} VS. ${up(H.cur.last)}` : '';
+  SG.build.goalies = () => title ? { Title: title, Subtitle: [line(V.cur), line(H.cur)].join('          '), 'Logo 1': pic(V.cur, S.visId), 'Logo 2': pic(H.cur, S.homeId), ...matchupColors() } : null;
+  function matchupColors(){
+    const cur = (SG.payload && SG.payload['Fullscreen - Matchup']) || {}, out = {};
+    if(TEAM_COLOR[S.visId] && cur['Logo 1 Color']) out['Logo 1 Color'] = sgColor(cur['Logo 1 Color'], TEAM_COLOR[S.visId]);
+    if(TEAM_COLOR[S.homeId] && cur['Logo 2 Color']) out['Logo 2 Color'] = sgColor(cur['Logo 2 Color'], TEAM_COLOR[S.homeId]);
+    return out;
+  }
+  const sel = (id, x) => `<label class="hint">${esc((T(id) || {}).name)} goalie <select data-goalie="${id}">${x.gs.map(g => `<option value="${g.id}" ${x.cur && g.id === x.cur.id ? 'selected' : ''}>#${esc(g.num)} ${esc(g.name)} (${(g.g || {}).games_played || 0} GP)</option>`).join('')}</select></label>`;
+  return `<div class="panel">
+    <h2>Fullscreen - Matchup</h2>
+    ${sgBar('Fullscreen - Matchup', 'goalies')}
+    <div class="row">${sel(S.visId, V)} ${sel(S.homeId, H)}</div>
+    ${field('Title', title)}
+    ${field('Subtitle', [line(V.cur), line(H.cur)].filter(Boolean).join('          '))}
+    ${field('Logo 1 (headshot, or team logo)', pic(V.cur, S.visId))}
+    ${field('Logo 2 (headshot, or team logo)', pic(H.cur, S.homeId))}
+    <p class="hint">Record is W-L-OTL-SOL. League headshots are small (240px); PhotoShelter ones will look sharper full-screen.</p>
+  </div>`;
+}
+
+function renderChecks(){
+  const notes = [];
+  for(const id of [S.visId, S.homeId]){
+    const ps = playersFor(id), seen = {};
+    for(const p of ps) if(p.num) (seen[p.num] = seen[p.num] || []).push(p.name);
+    for(const [n, names] of Object.entries(seen)) if(names.length > 1) notes.push(`${(T(id) || {}).code}: #${n} is listed for ${names.join(' and ')} in the league roster.`);
+    const noPhoto = ps.filter(p => !p.photo).length;
+    if(noPhoto) notes.push(`${(T(id) || {}).code}: ${noPhoto} of ${ps.length} players have no league headshot.`);
+  }
+  if(!notes.length) return '';
+  return `<div class="panel"><h3>Worth checking</h3><div class="checks">${notes.map(n => `<div class="w">${esc(n)}</div>`).join('')}</div></div>`;
+}
+
+function render(){
+  document.querySelectorAll('nav.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === S.tab));
+  const v = document.getElementById('view');
+  if(!S.team[S.homeId]){ v.innerHTML = ''; return; }
+  const body = { bios: renderBios, scorers: renderScorers, last5: renderLast5, standings: renderStandings, goalies: renderGoalies }[S.tab]();
+  v.innerHTML = `<section class="view">${body}${S.tab === 'bios' || S.tab === 'goalies' ? renderChecks() : ''}</section>`;
+}
+
+/* ---------- events ---------- */
+async function copyText(text, btn){
+  try{ await navigator.clipboard.writeText(text); }
+  catch{ const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+  const old = btn.textContent; btn.textContent = 'Copied'; btn.classList.add('done');
+  setTimeout(() => { btn.textContent = old; btn.classList.remove('done'); }, 1200);
+}
+function currentBioPlayer(){ return playersFor(S.bioSide === 'home' ? S.homeId : S.visId).find(p => p.id === S.bioPid); }
+
+document.addEventListener('click', e => {
+  const b = e.target.closest('button'); if(!b) return;
+  if(b.dataset.sgSend){ b.disabled = true; b.textContent = 'Sending…'; sgSend(b.dataset.sgName, b.dataset.sgSend, !!b.dataset.sgSure); return; }
+  if(b.dataset.sgCancel){ SG.confirm = null; render(); return; }
+  if(b.id === 'killAll'){ killAll(); return; }
+  if(b.dataset.sgTake){ sgTake(b.dataset.sgName, b.dataset.sgTake); return; }
+  if(b.dataset.tab){ S.tab = b.dataset.tab; store.set('tab', S.tab); render(); }
+  else if(b.dataset.copy !== undefined){
+    const main = b.closest('.field') && b.closest('.field').querySelector('#main');
+    copyText(main ? main.value : b.dataset.copy, b);
+  }
+  else if(b.dataset.pid){ S.bioPid = b.dataset.pid; render(); }
+  else if(b.dataset.side){ S.bioSide = b.dataset.side; S.bioPid = null; render(); }
+  else if(b.dataset.bsort){ S.bioSort = b.dataset.bsort; store.set('bioSort', S.bioSort); render(); }
+  else if(b.dataset.topn){ store.set('topN', b.dataset.topn); render(); }
+  else if(b.dataset.conf){ S.conf = b.dataset.conf; render(); }
+  else if(b.dataset.add){
+    const p = currentBioPlayer(), ta = document.getElementById('main'); if(!p || !ta) return;
+    const lines = ta.value.split('\n'), bl = bottomLine(p), at = lines.findIndex(l => l.trim() === bl.trim());
+    if(at >= 0) lines.splice(at, 0, b.dataset.add); else lines.push(b.dataset.add);
+    ta.value = lines.filter((l, i) => l.trim() || i === lines.length - 1).join('\n');
+    store.set(mainKey(p), ta.value); render();
+  }
+  else if(b.id === 'resetMain'){
+    const p = currentBioPlayer(); if(!p) return;
+    try{ localStorage.removeItem('gd.' + mainKey(p)); }catch{}
+    render();
+  }
+  else if(b.id === 'refresh'){ refresh(); sgLoad(); }
+});
+document.addEventListener('input', e => {
+  if(e.target.id === 'main'){ const p = currentBioPlayer(); if(p) store.set(mainKey(p), e.target.value); }
+});
+document.addEventListener('change', async e => {
+  const t = e.target;
+  if(t.id === 'home'){ S.homeId = t.value; S.bioSide = 'home'; await refresh(); }
+  else if(t.id === 'vis'){ S.visId = t.value; S.bioSide = 'vis'; await refresh(); }
+  else if(t.id === 'season'){
+    S.season = t.value; store.set('season', S.season);
+    try{ await loadTeams(); }catch{}
+    if(!T(S.homeId)) S.homeId = S.teams[0].id;
+    if(!T(S.visId)) S.visId = S.teams[1].id;
+    fillSelects(); await refresh();
+  }
+  else if(t.dataset.goalie){ S.goalie[t.dataset.goalie] = t.value; render(); }
+});
+
+sgLoad().then(render);
+// Keep the On air / Off air tags current when graphics are taken from Singular's own screen.
+setInterval(async () => {
+  if(!SG.on) return;
+  const before = JSON.stringify(SG.state); await sgLoad();
+  if(JSON.stringify(SG.state) !== before && document.activeElement.id !== 'main') render();
+}, 15000);
+init();
+</script>
