@@ -318,18 +318,8 @@ window.PA_DATA = {
    "htId": 27,
    "url": "https://pickeringpanthers.ojhl.ca/stats/roster/27",
    "goalsAsOf": "2026-10-25 before game",
-   "updatedAt": 1792932743667,
+   "updatedAt": 1792969766404,
    "players": [
-    {
-     "id": "st0",
-     "num": "0",
-     "first": "Dylan",
-     "last": "Kirk",
-     "pos": "F",
-     "hometown": "",
-     "say": "",
-     "goals": 1
-    },
     {
      "id": "st1",
      "num": "1",
@@ -339,6 +329,16 @@ window.PA_DATA = {
      "hometown": "Toronto, ON",
      "say": "",
      "goals": 0
+    },
+    {
+     "id": "st0",
+     "num": "2",
+     "first": "Dylan",
+     "last": "Kirk",
+     "pos": "D",
+     "hometown": "",
+     "say": "",
+     "goals": 1
     },
     {
      "id": "st3",
@@ -379,6 +379,16 @@ window.PA_DATA = {
      "hometown": "North York, ON",
      "say": "",
      "goals": 0
+    },
+    {
+     "id": "st37",
+     "num": "7",
+     "first": "Andreas",
+     "last": "Mikrogiannakis",
+     "pos": "F",
+     "hometown": "Aurora, ON",
+     "say": "",
+     "goals": 1
     },
     {
      "id": "st8",
@@ -531,6 +541,16 @@ window.PA_DATA = {
      "goals": 2
     },
     {
+     "id": "st26",
+     "num": "26",
+     "first": "H.",
+     "last": "Armstrong",
+     "pos": "RW",
+     "hometown": "",
+     "say": "",
+     "goals": 0
+    },
+    {
      "id": "st27",
      "num": "27",
      "first": "Ronan",
@@ -552,7 +572,7 @@ window.PA_DATA = {
     },
     {
      "id": "st30",
-     "num": "30",
+     "num": "31",
      "first": "Owen",
      "last": "MacLean",
      "pos": "G",
@@ -569,16 +589,6 @@ window.PA_DATA = {
      "hometown": "Pickering, ON",
      "say": "",
      "goals": 0
-    },
-    {
-     "id": "st37",
-     "num": "37",
-     "first": "Andreas",
-     "last": "Mikrogiannakis",
-     "pos": "F",
-     "hometown": "Aurora, ON",
-     "say": "",
-     "goals": 1
     }
    ]
   }
@@ -864,13 +874,21 @@ window.PA_DATA = {
  },
  "game": {
   "gameId": "2026-10-25-STO-at-PIC",
-  "rev": 1,
-  "updatedAt": 1792932743667,
+  "rev": 2,
+  "updatedAt": 1792969766404,
   "homeId": "pickering-panthers",
   "visitorId": "stouffville-spirit",
   "date": "2026-10-25",
   "start": "7:30 PM",
-  "notDressed": [],
+  "notDressed": [
+   "st1",
+   "st9",
+   "st10",
+   "st11",
+   "st12",
+   "st16",
+   "st24"
+  ],
   "starters": {
    "home": [],
    "visitor": []
@@ -947,7 +965,26 @@ window.PA_DATA = {
     "status": "",
     "note": ""
    }
-  ]
+  ],
+  "setStarters": {
+   "rev": 1,
+   "home": [
+    "pk91",
+    "pk52",
+    "pk3",
+    "pk44",
+    "pk55",
+    "pk33"
+   ],
+   "visitor": [
+    "st37",
+    "st23",
+    "st22",
+    "st8",
+    "st6",
+    "st33"
+   ]
+  }
  },
  "removedTeams": [
   "st-michaels-buzzers",
