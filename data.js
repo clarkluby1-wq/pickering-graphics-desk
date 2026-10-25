@@ -874,8 +874,8 @@ window.PA_DATA = {
  },
  "game": {
   "gameId": "2026-10-25-STO-at-PIC",
-  "rev": 2,
-  "updatedAt": 1792969766404,
+  "rev": 3,
+  "updatedAt": 1792971563031,
   "homeId": "pickering-panthers",
   "visitorId": "stouffville-spirit",
   "date": "2026-10-25",
@@ -887,7 +887,17 @@ window.PA_DATA = {
    "st11",
    "st12",
    "st16",
-   "st24"
+   "st24",
+   "pk94",
+   "pk72",
+   "pk14",
+   "pk71",
+   "pk21",
+   "pk35",
+   "pk4",
+   "pk29",
+   "pk10",
+   "pk37"
   ],
   "starters": {
    "home": [],
