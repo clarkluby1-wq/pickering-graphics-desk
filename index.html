@@ -459,14 +459,23 @@ function teamSeg(){
 
 function renderBios(){
   const tid = S.bioSide === 'home' ? S.homeId : S.visId;
-  // List order: by jersey number (default) or by points; goalies always last.
+  // List order: jersey number (default), last name A–Z / Z–A, or most G / A / PTS; goalies always last, by number on stat sorts.
   const lastKey = x => String(x.last || String(x.name || '').split(' ').slice(-1)[0]).normalize('NFD').replace(/[^a-zA-Z]/g, '').toLowerCase();
-  const bySort = S.bioSort === 'name'
-    ? (a, b) => (a.goalie - b.goalie) || lastKey(a).localeCompare(lastKey(b)) || String(a.first || '').localeCompare(String(b.first || ''))
-    : S.bioSort === 'pts'
-    ? (a, b) => (a.goalie - b.goalie) || (a.goalie ? ((+a.num || 999) - (+b.num || 999)) : (((+(b.s || {}).points || 0) - (+(a.s || {}).points || 0)) || ((+(b.s || {}).goals || 0) - (+(a.s || {}).goals || 0)) || ((+a.num || 999) - (+b.num || 999))))
-    : (a, b) => (a.goalie - b.goalie) || ((+a.num || 999) - (+b.num || 999));
-  const ps = playersFor(tid).slice().sort(bySort);
+  const byName = (a, b) => lastKey(a).localeCompare(lastKey(b)) || String(a.first || '').localeCompare(String(b.first || ''));
+  const byNum = (a, b) => (+a.num || 999) - (+b.num || 999);
+  const st = (x, k) => +(x.s || {})[k] || 0;
+  // Most of the chosen stat first; ties go to the other stats, then jersey number.
+  const byStat = keys => (a, b) => a.goalie ? byNum(a, b) : (keys.map(k => st(b, k) - st(a, k)).find(v => v) || byNum(a, b));
+  const SORTS = {
+    num: byNum,
+    name: byName,
+    namez: (a, b) => byName(b, a),
+    g: byStat(['goals', 'points', 'assists']),
+    a: byStat(['assists', 'points', 'goals']),
+    pts: byStat(['points', 'goals', 'assists']),
+  };
+  const sortFn = SORTS[S.bioSort] || SORTS.num;
+  const ps = playersFor(tid).slice().sort((a, b) => (a.goalie - b.goalie) || sortFn(a, b));
   if(!ps.length) return `<div class="panel"><p class="hint">No roster loaded yet.</p></div>`;
   if(!ps.some(p => p.id === S.bioPid)) S.bioPid = ps[0].id;
   const p = ps.find(x => x.id === S.bioPid);
@@ -490,7 +499,7 @@ function renderBios(){
   };
   const sugBtns = arr => arr.map(x => `<button data-add="${esc(x)}" class="${used.includes(x) ? 'used' : ''}">${esc(x)}</button>`).join('');
   return `<div class="bios">
-    <div class="panel">${teamSeg()}<div class="seg bsort" style="margin-top:8px"><span class="hint" style="align-self:center;padding:0 8px">Sort</span><button data-bsort="num" aria-pressed="${S.bioSort !== 'pts' && S.bioSort !== 'name'}"># Number</button><button data-bsort="name" aria-pressed="${S.bioSort === 'name'}">A–Z Last name</button><button data-bsort="pts" aria-pressed="${S.bioSort === 'pts'}">PTS Points</button></div><div class="plist">${list}</div></div>
+    <div class="panel">${teamSeg()}<div class="seg bsort" style="margin-top:8px"><span class="hint" style="align-self:center;padding:0 8px">Sort</span>${[['num', '#'], ['name', 'A–Z'], ['namez', 'Z–A'], ['g', 'G'], ['a', 'A'], ['pts', 'PTS']].map(([k, label]) => `<button data-bsort="${k}" aria-pressed="${(SORTS[S.bioSort] ? S.bioSort : 'num') === k}">${label}</button>`).join('')}</div><div class="plist">${list}</div></div>
     <div class="grid2" style="grid-template-columns:1fr">
       <div class="panel">
         <div class="head">
