@@ -297,17 +297,28 @@ window.PA_DATA = {
     },
     {
      "id": "pk37",
-     "num": "37",
+     "num": "28",
      "first": "Eric",
      "last": "Okovita",
      "pos": "D",
      "hometown": "York, ON",
      "say": "",
      "goals": 0
+    },
+    {
+     "id": "pk89g",
+     "num": "89",
+     "first": "",
+     "last": "Gill",
+     "pos": "D",
+     "hometown": "",
+     "say": "",
+     "goals": 0,
+     "unverified": true
     }
    ],
    "short": "Pickering",
-   "updatedAt": 1793553787572,
+   "updatedAt": 1793577603446,
    "url": "https://pickeringpanthers.ojhl.ca/stats/roster/25",
    "goalsAsOf": "2026-11-01 before game",
    "htId": 25
@@ -318,7 +329,7 @@ window.PA_DATA = {
    "htId": 30,
    "url": "https://pickeringpanthers.ojhl.ca/stats/roster/30",
    "goalsAsOf": "2026-11-01 before game",
-   "updatedAt": 1793553787572,
+   "updatedAt": 1793577603446,
    "players": [
     {
      "id": "tr2",
@@ -572,7 +583,7 @@ window.PA_DATA = {
     },
     {
      "id": "tr97",
-     "num": "97",
+     "num": "18",
      "first": "Thomas",
      "last": "Harnett",
      "pos": "LW",
@@ -602,7 +613,7 @@ window.PA_DATA = {
     },
     {
      "id": "tr100",
-     "num": "100",
+     "num": "3",
      "first": "Peter",
      "last": "Overzat",
      "pos": "D",
@@ -612,7 +623,7 @@ window.PA_DATA = {
     },
     {
      "id": "tr101",
-     "num": "101",
+     "num": "1",
      "first": "Eli",
      "last": "Zucker",
      "pos": "G",
@@ -904,13 +915,20 @@ window.PA_DATA = {
  },
  "game": {
   "gameId": "2026-11-01-TRN-at-PIC",
-  "rev": 1,
+  "rev": 2,
   "updatedAt": 1793553787572,
   "homeId": "pickering-panthers",
   "visitorId": "trenton-golden-hawks",
   "date": "2026-11-01",
   "start": "7:30 PM",
-  "notDressed": [],
+  "notDressed": [
+   "pk71",
+   "pk10",
+   "pk52",
+   "pk22",
+   "pk17",
+   "pk91"
+  ],
   "starters": {
    "home": [],
    "visitor": []
@@ -995,7 +1013,26 @@ window.PA_DATA = {
     "status": "",
     "note": ""
    }
-  ]
+  ],
+  "setStarters": {
+   "rev": 1,
+   "home": [
+    "pk68",
+    "pk27",
+    "pk16",
+    "pk44",
+    "pk55",
+    "pk33"
+   ],
+   "visitor": [
+    "tr25",
+    "tr15",
+    "tr17",
+    "tr12",
+    "tr26",
+    "tr101"
+   ]
+  }
  },
  "removedTeams": [
   "st-michaels-buzzers",
