@@ -23,7 +23,7 @@ window.PA_DATA = {
      "num": "66",
      "pos": "F",
      "say": "",
-     "goals": 8
+     "goals": 9
     },
     {
      "first": "Keaton",
@@ -63,7 +63,7 @@ window.PA_DATA = {
      "num": "91",
      "pos": "F",
      "say": "",
-     "goals": 10
+     "goals": 11
     },
     {
      "first": "Hunter",
@@ -73,7 +73,7 @@ window.PA_DATA = {
      "num": "77",
      "pos": "F",
      "say": "",
-     "goals": 2
+     "goals": 3
     },
     {
      "first": "Jeremiah",
@@ -213,7 +213,7 @@ window.PA_DATA = {
      "num": "15",
      "pos": "F",
      "say": "",
-     "goals": 3
+     "goals": 4
     },
     {
      "first": "Mateo",
@@ -318,316 +318,266 @@ window.PA_DATA = {
     }
    ],
    "short": "Pickering",
-   "updatedAt": 1793577603446,
+   "updatedAt": 1794576171605,
    "url": "https://pickeringpanthers.ojhl.ca/stats/roster/25",
-   "goalsAsOf": "2026-11-01 before game",
+   "goalsAsOf": "2026-11-13 before game",
    "htId": 25
   },
-  "trenton-golden-hawks": {
-   "name": "Trenton Golden Hawks",
-   "short": "Trenton",
-   "htId": 30,
-   "url": "https://pickeringpanthers.ojhl.ca/stats/roster/30",
-   "goalsAsOf": "2026-11-01 before game",
-   "updatedAt": 1793577603446,
+  "king-rebellion": {
+   "name": "King Rebellion",
+   "short": "King",
+   "htId": 12,
+   "url": "https://pickeringpanthers.ojhl.ca/stats/roster/12",
+   "goalsAsOf": "2026-11-13 before game",
+   "updatedAt": 1794576171605,
    "players": [
     {
-     "id": "tr2",
-     "num": "2",
-     "first": "Hunter",
-     "last": "Spicher",
-     "pos": "D",
-     "hometown": "Johnstown, PA",
+     "id": "kg4",
+     "num": "4",
+     "first": "Jared",
+     "last": "McNeil",
+     "pos": "C",
+     "hometown": "Aurora, ON",
+     "say": "",
+     "goals": 10
+    },
+    {
+     "id": "kg9",
+     "num": "9",
+     "first": "Markus",
+     "last": "Harper",
+     "pos": "RW",
+     "hometown": "Toronto, ON",
      "say": "",
      "goals": 0
     },
     {
-     "id": "tr7",
-     "num": "7",
-     "first": "Ryan",
-     "last": "Chamberlain",
+     "id": "kg10",
+     "num": "10",
+     "first": "Thomas",
+     "last": "Cecutti",
+     "pos": "D",
+     "hometown": "Newmarket, ON",
+     "say": "",
+     "goals": 0
+    },
+    {
+     "id": "kg11",
+     "num": "11",
+     "first": "Andrew",
+     "last": "Willis",
+     "pos": "D",
+     "hometown": "Ilderton, ON",
+     "say": "",
+     "goals": 1
+    },
+    {
+     "id": "kg13",
+     "num": "13",
+     "first": "Marshall",
+     "last": "McCharles",
      "pos": "LW",
-     "hometown": "Peterborough, ON",
+     "hometown": "North Bay, ON",
      "say": "",
      "goals": 8
     },
     {
-     "id": "tr8",
-     "num": "8",
-     "first": "Niko",
-     "last": "Krmpotic",
+     "id": "kg14",
+     "num": "14",
+     "first": "Nolan",
+     "last": "Davis",
      "pos": "D",
-     "hometown": "Georgetown, ON",
+     "hometown": "South Lyon, MI",
+     "say": "",
+     "goals": 1
+    },
+    {
+     "id": "kg14b",
+     "num": "14",
+     "first": "Lachlan",
+     "last": "Larmand",
+     "pos": "RW",
+     "hometown": "Tiny, ON",
      "say": "",
      "goals": 3
     },
     {
-     "id": "tr8b",
-     "num": "8",
-     "first": "Gabriel",
-     "last": "Smith",
-     "pos": "D",
-     "hometown": "Brampton, ON",
-     "say": "",
-     "goals": 0
-    },
-    {
-     "id": "tr9",
-     "num": "9",
-     "first": "Sterling",
-     "last": "Poff",
-     "pos": "RW",
-     "hometown": "Madoc, ON",
-     "say": "",
-     "goals": 1
-    },
-    {
-     "id": "tr10",
-     "num": "10",
-     "first": "Ethan",
-     "last": "Brassard",
-     "pos": "LW",
-     "hometown": "Bolton, ON",
-     "say": "",
-     "goals": 7
-    },
-    {
-     "id": "tr11",
-     "num": "11",
-     "first": "Liam",
-     "last": "Fisher",
-     "pos": "C",
-     "hometown": "London, ON",
-     "say": "",
-     "goals": 4
-    },
-    {
-     "id": "tr12",
-     "num": "12",
-     "first": "Nathan",
-     "last": "McHattie",
-     "pos": "D",
-     "hometown": "Peterborough, ON",
-     "say": "",
-     "goals": 0
-    },
-    {
-     "id": "tr13",
-     "num": "13",
-     "first": "Owen",
-     "last": "Rivers",
-     "pos": "LW",
-     "hometown": "Shannonville, ON",
-     "say": "",
-     "goals": 0
-    },
-    {
-     "id": "tr14",
-     "num": "14",
-     "first": "Beckett",
-     "last": "Ewart",
-     "pos": "RW",
-     "hometown": "Cobourg, ON",
-     "say": "",
-     "goals": 8
-    },
-    {
-     "id": "tr15",
+     "id": "kg15",
      "num": "15",
-     "first": "Ryan",
-     "last": "Foley",
-     "pos": "C",
-     "hometown": "Belleville, ON",
+     "first": "Adam",
+     "last": "Smeeton",
+     "pos": "LW",
+     "hometown": "Toronto, ON",
      "say": "",
-     "goals": 1
+     "goals": 15
     },
     {
-     "id": "tr16",
+     "id": "kg16",
      "num": "16",
-     "first": "Kaiden",
-     "last": "Harmon",
-     "pos": "LW",
-     "hometown": "Cobourg, ON",
+     "first": "Lucas",
+     "last": "Preiano",
+     "pos": "D",
+     "hometown": "Toronto, ON",
      "say": "",
      "goals": 6
     },
     {
-     "id": "tr17",
+     "id": "kg17",
      "num": "17",
-     "first": "Mason",
-     "last": "Musclow",
-     "pos": "LW",
-     "hometown": "Stirling, ON",
-     "say": "",
-     "goals": 4
-    },
-    {
-     "id": "tr19",
-     "num": "19",
-     "first": "Kale",
-     "last": "Mace",
-     "pos": "RW",
-     "hometown": "Oshawa, ON",
-     "say": "",
-     "goals": 8
-    },
-    {
-     "id": "tr21",
-     "num": "21",
-     "first": "Charlie",
-     "last": "Gage",
+     "first": "Mars",
+     "last": "Sun",
      "pos": "C",
-     "hometown": "Sheridan, WY",
-     "say": "",
-     "goals": 5
-    },
-    {
-     "id": "tr22",
-     "num": "22",
-     "first": "Christian",
-     "last": "Sedgewick",
-     "pos": "D",
-     "hometown": "Bradford, ON",
-     "say": "",
-     "goals": 0
-    },
-    {
-     "id": "tr23",
-     "num": "23",
-     "first": "Evan",
-     "last": "Norris",
-     "pos": "C",
-     "hometown": "Bowmanville, ON",
-     "say": "",
-     "goals": 6
-    },
-    {
-     "id": "tr24",
-     "num": "24",
-     "first": "Ben",
-     "last": "Radley",
-     "pos": "D",
-     "hometown": "Iroquois, ON",
-     "say": "",
-     "goals": 1
-    },
-    {
-     "id": "tr25",
-     "num": "25",
-     "first": "Wyatt",
-     "last": "Gregory",
-     "pos": "RW",
-     "hometown": "Kingston, ON",
+     "hometown": "Shanghai, CHN",
      "say": "",
      "goals": 2
     },
     {
-     "id": "tr26",
-     "num": "26",
-     "first": "Michael",
-     "last": "Domina",
+     "id": "kg19",
+     "num": "19",
+     "first": "Dylan",
+     "last": "Turcotte",
+     "pos": "C",
+     "hometown": "Orleans, ON",
+     "say": "",
+     "goals": 4
+    },
+    {
+     "id": "kg20",
+     "num": "20",
+     "first": "Connor",
+     "last": "Barrett",
      "pos": "D",
-     "hometown": "Severna Park, MD",
+     "hometown": "Toronto, ON",
+     "say": "",
+     "goals": 0
+    },
+    {
+     "id": "kg21",
+     "num": "21",
+     "first": "Julius",
+     "last": "da Silva",
+     "pos": "RW",
+     "hometown": "Etobicoke, ON",
+     "say": "",
+     "goals": 6
+    },
+    {
+     "id": "kg22",
+     "num": "22",
+     "first": "Riley",
+     "last": "Clark",
+     "pos": "LW",
+     "hometown": "Toronto, ON",
+     "say": "",
+     "goals": 5
+    },
+    {
+     "id": "kg23",
+     "num": "23",
+     "first": "Justin",
+     "last": "Pavese",
+     "pos": "C",
+     "hometown": "Toronto, ON",
+     "say": "",
+     "goals": 11
+    },
+    {
+     "id": "kg25",
+     "num": "25",
+     "first": "Ryan",
+     "last": "Castle",
+     "pos": "D",
+     "hometown": "Mississauga, ON",
      "say": "",
      "goals": 1
     },
     {
-     "id": "tr27",
-     "num": "27",
-     "first": "Jax",
-     "last": "Martin",
-     "pos": "RW",
-     "hometown": "Foxboro, ON",
-     "say": "",
-     "goals": 0
-    },
-    {
-     "id": "tr28",
-     "num": "28",
-     "first": "Jackson",
-     "last": "Ciuffetelli",
-     "pos": "D",
-     "hometown": "Plymouth, MI",
-     "say": "",
-     "goals": 0
-    },
-    {
-     "id": "tr29",
-     "num": "29",
-     "first": "Hayden",
-     "last": "Jeffrey",
+     "id": "kg37",
+     "num": "37",
+     "first": "Logan",
+     "last": "Kennedy",
      "pos": "G",
-     "hometown": "Grimsby, ON",
+     "hometown": "Toronto, ON",
      "say": "",
      "goals": 0
     },
     {
-     "id": "tr30",
-     "num": "30",
-     "first": "Nolan",
-     "last": "Nicoll",
-     "pos": "G",
-     "hometown": "Oro-Medonte, ON",
-     "say": "",
-     "goals": 0
-    },
-    {
-     "id": "tr44",
+     "id": "kg44",
      "num": "44",
-     "first": "Matt",
-     "last": "Hicks",
+     "first": "Lucas",
+     "last": "Manikis",
      "pos": "D",
-     "hometown": "Trenton, ON",
+     "hometown": "Richmond Hill, ON",
+     "say": "",
+     "goals": 2
+    },
+    {
+     "id": "kg61",
+     "num": "61",
+     "first": "Clark",
+     "last": "Nakka",
+     "pos": "RW",
+     "hometown": "Toronto, ON",
      "say": "",
      "goals": 0
     },
     {
-     "id": "tr97",
-     "num": "18",
-     "first": "Thomas",
-     "last": "Harnett",
+     "id": "kg72",
+     "num": "72",
+     "first": "Gunner",
+     "last": "Wolfe",
+     "pos": "G",
+     "hometown": "Ramara, ON",
+     "say": "",
+     "goals": 0
+    },
+    {
+     "id": "kg77",
+     "num": "77",
+     "first": "Andrei",
+     "last": "Chumakov",
+     "pos": "C",
+     "hometown": "Yaroslavl, RUS",
+     "say": "",
+     "goals": 3
+    },
+    {
+     "id": "kg88",
+     "num": "88",
+     "first": "Brayden",
+     "last": "Grima",
+     "pos": "RW",
+     "hometown": "Toronto, ON",
+     "say": "",
+     "goals": 9
+    },
+    {
+     "id": "kg91",
+     "num": "91",
+     "first": "Michael",
+     "last": "Cunha",
      "pos": "LW",
-     "hometown": "Ajax, ON",
+     "hometown": "Maple, ON",
      "say": "",
-     "goals": 0
+     "goals": 2
     },
     {
-     "id": "tr98",
-     "num": "98",
-     "first": "Noah",
-     "last": "Hughes",
+     "id": "kg96",
+     "num": "96",
+     "first": "Matthew",
+     "last": "Legge",
+     "pos": "RW",
+     "hometown": "Carleton Place, ON",
+     "say": "",
+     "goals": 2
+    },
+    {
+     "id": "kg165",
+     "num": "165",
+     "first": "Tyssen",
+     "last": "Folco",
      "pos": "D",
-     "hometown": "Marmora, ON",
-     "say": "",
-     "goals": 0
-    },
-    {
-     "id": "tr99",
-     "num": "99",
-     "first": "Simon",
-     "last": "Godin",
-     "pos": "G",
-     "hometown": "Kingston, ON",
-     "say": "",
-     "goals": 0
-    },
-    {
-     "id": "tr100",
-     "num": "3",
-     "first": "Peter",
-     "last": "Overzat",
-     "pos": "D",
-     "hometown": "White Plains, NY",
-     "say": "",
-     "goals": 0
-    },
-    {
-     "id": "tr101",
-     "num": "1",
-     "first": "Eli",
-     "last": "Zucker",
-     "pos": "G",
-     "hometown": "Parkland, FL",
+     "hometown": "Stouffville, ON",
      "say": "",
      "goals": 0
     }
@@ -914,21 +864,14 @@ window.PA_DATA = {
   "updatedAt": 1790384425788
  },
  "game": {
-  "gameId": "2026-11-01-TRN-at-PIC",
-  "rev": 2,
-  "updatedAt": 1793553787572,
+  "gameId": "2026-11-13-KNG-at-PIC",
+  "rev": 1,
+  "updatedAt": 1794576171605,
   "homeId": "pickering-panthers",
-  "visitorId": "trenton-golden-hawks",
-  "date": "2026-11-01",
+  "visitorId": "king-rebellion",
+  "date": "2026-11-13",
   "start": "7:30 PM",
-  "notDressed": [
-   "pk71",
-   "pk10",
-   "pk52",
-   "pk22",
-   "pk17",
-   "pk91"
-  ],
+  "notDressed": [],
   "starters": {
    "home": [],
    "visitor": []
@@ -952,29 +895,13 @@ window.PA_DATA = {
   "done": {},
   "goalLog": [],
   "next": {
-   "when": "Friday, November 13th,",
-   "opp": "King Rebellion",
+   "when": "next Friday, November 20th,",
+   "opp": "Toronto Warriors",
    "time": "7:30 pm"
   },
   "board": [
    {
-    "v": "Cobourg Cougars",
-    "h": "Markham Royals",
-    "vs": "",
-    "hs": "",
-    "status": "",
-    "note": ""
-   },
-   {
-    "v": "Milton Menace",
-    "h": "St. Michaels Buzzers",
-    "vs": "",
-    "hs": "",
-    "status": "",
-    "note": ""
-   },
-   {
-    "v": "Lindsay Muskies",
+    "v": "Stouffville Spirit",
     "h": "North York Rangers",
     "vs": "",
     "hs": "",
@@ -982,15 +909,31 @@ window.PA_DATA = {
     "note": ""
    },
    {
-    "v": "Toronto Warriors",
-    "h": "Caledon Admirals",
+    "v": "Cobourg Cougars",
+    "h": "Lindsay Muskies",
     "vs": "",
     "hs": "",
     "status": "",
     "note": ""
    },
    {
-    "v": "Georgetown Raiders",
+    "v": "Trenton Golden Hawks",
+    "h": "Wellington Dukes",
+    "vs": "",
+    "hs": "",
+    "status": "",
+    "note": ""
+   },
+   {
+    "v": "Toronto Patriots",
+    "h": "Niagara Falls Canucks",
+    "vs": "",
+    "hs": "",
+    "status": "",
+    "note": ""
+   },
+   {
+    "v": "Leamington Flyers",
     "h": "Collingwood Blues",
     "vs": "",
     "hs": "",
@@ -998,41 +941,30 @@ window.PA_DATA = {
     "note": ""
    },
    {
-    "v": "Oakville Blades",
-    "h": "King Rebellion",
+    "v": "Caledon Admirals",
+    "h": "Aurora Tigers",
     "vs": "",
     "hs": "",
     "status": "",
     "note": ""
    },
    {
-    "v": "Aurora Tigers",
-    "h": "Buffalo Jr. Sabres",
+    "v": "Mississauga Chargers",
+    "h": "Burlington Cougars",
+    "vs": "",
+    "hs": "",
+    "status": "",
+    "note": ""
+   },
+   {
+    "v": "Toronto Warriors",
+    "h": "Markham Royals",
     "vs": "",
     "hs": "",
     "status": "",
     "note": ""
    }
-  ],
-  "setStarters": {
-   "rev": 1,
-   "home": [
-    "pk68",
-    "pk27",
-    "pk16",
-    "pk44",
-    "pk55",
-    "pk33"
-   ],
-   "visitor": [
-    "tr25",
-    "tr15",
-    "tr17",
-    "tr12",
-    "tr26",
-    "tr101"
-   ]
-  }
+  ]
  },
  "removedTeams": [
   "st-michaels-buzzers",
@@ -1041,6 +973,7 @@ window.PA_DATA = {
   "toronto-warriors",
   "newmarket-hurricanes",
   "north-york-rangers",
-  "stouffville-spirit"
+  "stouffville-spirit",
+  "trenton-golden-hawks"
  ]
 };
