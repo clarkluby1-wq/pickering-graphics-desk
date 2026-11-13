@@ -855,13 +855,24 @@ window.PA_DATA = {
  },
  "game": {
   "gameId": "2026-11-13-KNG-at-PIC",
-  "rev": 1,
-  "updatedAt": 1794576171605,
+  "rev": 2,
+  "updatedAt": 1794613397915,
   "homeId": "pickering-panthers",
   "visitorId": "king-rebellion",
   "date": "2026-11-13",
   "start": "7:30 PM",
-  "notDressed": [],
+  "notDressed": [
+   "pk77",
+   "pk16",
+   "pk22",
+   "pk14",
+   "pk21",
+   "pk35",
+   "pk4",
+   "pk29",
+   "pk37",
+   "pk89g"
+  ],
   "starters": {
    "home": [],
    "visitor": []
