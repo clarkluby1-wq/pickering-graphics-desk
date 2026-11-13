@@ -246,16 +246,6 @@ window.PA_DATA = {
      "goals": 0
     },
     {
-     "id": "pk52",
-     "num": "52",
-     "first": "Ethan",
-     "last": "Dean",
-     "pos": "F",
-     "hometown": "London, ON",
-     "say": "",
-     "goals": 6
-    },
-    {
      "id": "pk35",
      "num": "35",
      "first": "Cohen",
@@ -318,7 +308,7 @@ window.PA_DATA = {
     }
    ],
    "short": "Pickering",
-   "updatedAt": 1794576171605,
+   "updatedAt": 1794577691931,
    "url": "https://pickeringpanthers.ojhl.ca/stats/roster/25",
    "goalsAsOf": "2026-11-13 before game",
    "htId": 25
