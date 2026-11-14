@@ -319,7 +319,7 @@ window.PA_DATA = {
    "htId": 12,
    "url": "https://pickeringpanthers.ojhl.ca/stats/roster/12",
    "goalsAsOf": "2026-11-13 before game",
-   "updatedAt": 1794576171605,
+   "updatedAt": 1794615239646,
    "players": [
     {
      "id": "kg4",
@@ -383,7 +383,7 @@ window.PA_DATA = {
     },
     {
      "id": "kg14b",
-     "num": "14",
+     "num": "92",
      "first": "Lachlan",
      "last": "Larmand",
      "pos": "RW",
@@ -856,7 +856,7 @@ window.PA_DATA = {
  "game": {
   "gameId": "2026-11-13-KNG-at-PIC",
   "rev": 2,
-  "updatedAt": 1794613397915,
+  "updatedAt": 1794615239646,
   "homeId": "pickering-panthers",
   "visitorId": "king-rebellion",
   "date": "2026-11-13",
@@ -965,7 +965,26 @@ window.PA_DATA = {
     "status": "",
     "note": ""
    }
-  ]
+  ],
+  "setStarters": {
+   "rev": 2,
+   "home": [
+    "pk15",
+    "pk27",
+    "pk71",
+    "pk44",
+    "pk9",
+    "pk36"
+   ],
+   "visitor": [
+    "kg13",
+    "kg23",
+    "kg14b",
+    "kg16",
+    "kg11",
+    "kg72"
+   ]
+  }
  },
  "removedTeams": [
   "st-michaels-buzzers",
